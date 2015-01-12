@@ -1,0 +1,2 @@
+defmodule Mugofccino do
+end
