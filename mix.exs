@@ -5,6 +5,8 @@ defmodule Mugofccino.Mixfile do
     [app: :mugofccino,
      version: "0.0.1",
      elixir: "~> 1.0",
+     elixirc_paths: ["lib", "web"],
+     compilers: [:phoenix] ++ Mix.compilers,
      deps: deps]
   end
 
@@ -12,19 +14,15 @@ defmodule Mugofccino.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [mod: {Mugofccino, []},
+     applications: [:phoenix, :cowboy, :logger]]
   end
 
-  # Dependencies can be Hex packages:
+  # Specifies your project dependencies
   #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type `mix help deps` for more examples and options
+  # Type `mix help deps` for examples and options
   defp deps do
-    []
+    [{:phoenix, github: "phoenixframework/phoenix"},
+     {:cowboy, "~> 1.0"}]
   end
 end
