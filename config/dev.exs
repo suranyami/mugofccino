@@ -40,3 +40,6 @@ config :mugofccino, Mugofccino.Repo,
   database: "mugofccino_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :addict, mailgun_domain: "mugofccino.com",
+                mailgun_key: "apikey-secr3tzapik3y"

@@ -30,3 +30,12 @@ config :phoenix, :generators,
 
 config :phoenix, :template_engines,
   haml: PhoenixHaml.Engine
+
+config :addict, not_logged_in_url: "/error", 
+  db: Mugofccino.Repo,
+  user: Mugofccino.User,
+  register_from_email: "Registration <welcome@mugofccino.com>",
+  register_subject: "Welcome to Mugofccino!",
+  password_recover_from_email: "Password Recovery <no-reply@mugofccino.com>",
+  password_recover_subject: "You requested a password recovery link",
+  email_templates: Mugofccino.EmailTemplates
