@@ -9,3 +9,21 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Mugofccino.Repo
+alias Mugofccino.User
+
+params = %{
+  first_name: "David",
+  surname: "Parry",
+  email: "david.parry@suranyami.com"
+}
+
+changeset = User.changeset(%User{}, params)
+
+case Repo.insert(changeset) do
+  {:ok, _user} ->
+    IO.puts("User created successfully.")
+  {:error, changeset} ->
+    IO.puts(changeset)
+end
