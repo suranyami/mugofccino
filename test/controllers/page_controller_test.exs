@@ -3,6 +3,6 @@ defmodule Mugofccino.PageControllerTest do
 
   test "GET /" do
     conn = get conn(), "/"
-    assert html_response(conn, 200) =~ "Chat"
+    assert html_response(conn, 200) =~ "Spacewar"
   end
 end

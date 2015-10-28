@@ -1,0 +1,30 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
+@import "base/base";
+
+$base-size: 12px;
+
+body {
+  background-color: black;
+  color: white;
+  @include outer-container;
+  font-family: $helvetica;
+  font-size: $base-size;
+}
+
+h1 {font-size: golden-ratio($base-size,  5)}
+h2 {font-size: golden-ratio($base-size,  4)}
+h3 {font-size: golden-ratio($base-size,  3)}
+h4 {font-size: golden-ratio($base-size,  2)}
+h5 {font-size: golden-ratio($base-size,  1)}
+h6 {font-size: golden-ratio($base-size,  0)}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+#content {
+  @include span-columns(10);
+  @include shift(1);
+}

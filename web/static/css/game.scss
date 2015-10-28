@@ -1,0 +1,30 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
+@import "base/base";
+
+$screen-border: 1px solid white;
+
+#scorebar, #status {
+  width: 600px;
+  margin: 0;
+  padding: 3pt;
+  display: block;
+}
+
+#scorebar {
+  border: $screen-border;
+  border-bottom: none;
+}
+
+#status {
+  border: $screen-border;
+  border-top: none;
+}
+
+#screen {
+  width: 600px;
+  height: 400px;
+  margin: 0;
+  padding: 0;
+  border: $screen-border;
+}
