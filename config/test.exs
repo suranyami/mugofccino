@@ -9,9 +9,6 @@ config :mugofccino, Mugofccino.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-# Set a higher stacktrace during test
-config :phoenix, :stacktrace_depth, 20
-
 # Configure your database
 config :mugofccino, Mugofccino.Repo,
   adapter: Ecto.Adapters.Postgres,
