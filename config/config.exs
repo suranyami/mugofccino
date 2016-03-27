@@ -9,7 +9,7 @@ use Mix.Config
 config :mugofccino, Mugofccino.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
-  secret_key_base: "63wJ7IMgVYTOKHrROEi/gHqVzQ8zV21+XSHHOH33KBesiTBXz4lRd1JkmG8Mb3RT",
+  secret_key_base: "xuZDe2enRKtv89zis2idsKdRwjzzUg+PkGWcKRQLgT4ha3cx9VMrKvTyOTD89L3p",
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: Mugofccino.PubSub,
            adapter: Phoenix.PubSub.PG2]

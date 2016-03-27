@@ -1,7 +1,3 @@
-@import "bourbon/bourbon";
-@import "neat/neat";
-@import "base/base";
-
 $screen-border: 1px solid white;
 
 #scorebar, #status {
@@ -27,4 +23,5 @@ $screen-border: 1px solid white;
   margin: 0;
   padding: 0;
   border: $screen-border;
+  color: red;
 }
