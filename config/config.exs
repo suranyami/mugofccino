@@ -9,7 +9,7 @@ use Mix.Config
 config :mugofccino, Mugofccino.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
-  secret_key_base: "xuZDe2enRKtv89zis2idsKdRwjzzUg+PkGWcKRQLgT4ha3cx9VMrKvTyOTD89L3p",
+  secret_key_base: "JtZwUJMKsxHUnWJPJbOcQd8arYMAe3AFMXJ0yBIu7GkdMnaRTCmWgb+Dc+BO0hzM",
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: Mugofccino.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -28,14 +28,5 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
 
-config :phoenix, :template_engines,
-  haml: PhoenixHaml.Engine
-
-config :addict, not_logged_in_url: "/error", 
-  db: Mugofccino.Repo,
-  user: Mugofccino.User,
-  register_from_email: "Registration <welcome@mugofccino.com>",
-  register_subject: "Welcome to Mugofccino!",
-  password_recover_from_email: "Password Recovery <no-reply@mugofccino.com>",
-  password_recover_subject: "You requested a password recovery link",
-  email_templates: Mugofccino.EmailTemplates
+  config :phoenix, :template_engines,
+    haml: PhoenixHaml.Engine
