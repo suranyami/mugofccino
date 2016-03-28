@@ -33,7 +33,7 @@ defmodule Mugofccino.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_mugofccino_key",
-    signing_salt: "mf3ES6an"
+    signing_salt: "b9MxXLoi"
 
   plug Mugofccino.Router
 end

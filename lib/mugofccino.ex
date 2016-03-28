@@ -10,7 +10,7 @@ defmodule Mugofccino do
       # Start the endpoint when the application starts
       supervisor(Mugofccino.Endpoint, []),
       # Start the Ecto repository
-      worker(Mugofccino.Repo, []),
+      supervisor(Mugofccino.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(Mugofccino.Worker, [arg1, arg2, arg3]),
     ]
