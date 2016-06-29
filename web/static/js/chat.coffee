@@ -1,11 +1,15 @@
-socket = require './socket'
+#require './socket'
+
+console.log "Chat"
+
 socket.connect()
 chan = socket.channel "rooms:lobby", {}
 
-chatInput         = $("#chat-input")
-messagesContainer = $("#messages")
+chatInput         = document.getElementById("#chat-input")
+messagesContainer = document.getElementById("#messages")
 
-chatInput.on "keypress", (event) =>
+chatInput.on "keyup", (event) =>
+  console.log event
   if event.keyCode == 13
     chan.push "new_msg", {body: chatInput.val()}
     chatInput.val ""
