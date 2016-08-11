@@ -1,6 +1,5 @@
+ExUnit.configure exclude: :pending, trace: true
 ExUnit.start
+Faker.start
 
-Mix.Task.run "ecto.create", ~w(-r Mugofccino.Repo --quiet)
-Mix.Task.run "ecto.migrate", ~w(-r Mugofccino.Repo --quiet)
-Ecto.Adapters.SQL.begin_test_transaction(Mugofccino.Repo)
-
+Ecto.Adapters.SQL.Sandbox.mode(Mugofccino.Repo, :manual)

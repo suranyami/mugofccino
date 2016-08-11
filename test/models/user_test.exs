@@ -4,22 +4,19 @@ defmodule Mugofccino.UserTest do
   alias Mugofccino.User
 
   @valid_attrs %{
-    email: Faker.Internet.email,
-    first_name: Faker.Name.first_name,
-    surname: Faker.Name.last_name
+    email: "some content",
+    first_name: "some content",
+    surname: "some content"
   }
-  
-  @invalid_attrs %{
-    email: "xyz",
-  }
+  @invalid_attrs %{}
 
   test "changeset with valid attributes" do
     changeset = User.changeset(%User{}, @valid_attrs)
     assert changeset.valid?
   end
 
-  test "invalid email" do
-    changeset = User.changeset(%User{}, %{email: "xyz"})
+  test "changeset with invalid attributes" do
+    changeset = User.changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
 end

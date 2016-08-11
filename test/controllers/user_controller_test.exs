@@ -3,20 +3,11 @@ defmodule Mugofccino.UserControllerTest do
 
   alias Mugofccino.User
   @valid_attrs %{
-    email: "person@example.com",
-    first_name: "Norm",
-    surname: "Smith"
+    email: "some content",
+    first_name: "some content",
+    surname: "some content"
   }
-  @invalid_attrs %{
-    email: "wrong",
-    first_name: "",
-    surname: ""
-  }
-
-  setup do
-    conn = conn()
-    {:ok, conn: conn}
-  end
+  @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, user_path(conn, :index)
@@ -28,13 +19,14 @@ defmodule Mugofccino.UserControllerTest do
     assert html_response(conn, 200) =~ "New user"
   end
 
-  test "creates resource and redirects when data is valid", %{conn: conn} do
+  test "creates resource & redirects when data is valid", %{conn: conn} do
     conn = post conn, user_path(conn, :create), user: @valid_attrs
     assert redirected_to(conn) == user_path(conn, :index)
     assert Repo.get_by(User, @valid_attrs)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt create resource & renders errors when data invalid",
+      %{conn: conn} do
     conn = post conn, user_path(conn, :create), user: @invalid_attrs
     assert html_response(conn, 200) =~ "New user"
   end
@@ -46,7 +38,7 @@ defmodule Mugofccino.UserControllerTest do
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_raise Ecto.NoResultsError, fn ->
+    assert_error_sent 404, fn ->
       get conn, user_path(conn, :show, -1)
     end
   end
@@ -57,14 +49,16 @@ defmodule Mugofccino.UserControllerTest do
     assert html_response(conn, 200) =~ "Edit user"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates chosen resource & redirects when data is valid",
+      %{conn: conn} do
     user = Repo.insert! %User{}
     conn = put conn, user_path(conn, :update, user), user: @valid_attrs
     assert redirected_to(conn) == user_path(conn, :show, user)
     assert Repo.get_by(User, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt update chosen resource & renders errors when data is invalid",
+      %{conn: conn} do
     user = Repo.insert! %User{}
     conn = put conn, user_path(conn, :update, user), user: @invalid_attrs
     assert html_response(conn, 200) =~ "Edit user"
