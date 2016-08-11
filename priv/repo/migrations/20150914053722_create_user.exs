@@ -3,7 +3,8 @@ defmodule Mugofccino.Repo.Migrations.CreateUser do
 
   def change do
     create table(:users) do
-      add :name, :string
+      add :first_name, :string
+      add :surname, :string
       add :email, :string
 
       timestamps

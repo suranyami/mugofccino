@@ -3,7 +3,7 @@
 <ul>
 
   <li>
-    <strong>First Name:</strong>
+    <strong>First name:</strong>
     <%= @user.first_name %>
   </li>
 
