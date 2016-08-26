@@ -8,9 +8,7 @@
 
   "dependencies": {
     "phoenix": "file:deps/phoenix",
-    "phoenix_html": "file:deps/phoenix_html",
-    "svgjs": "~2.2.5",
-    "animejs": "~1.1.0"
+    "phoenix_html": "file:deps/phoenix_html"
   },
 
   "devDependencies": {

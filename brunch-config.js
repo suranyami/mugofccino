@@ -65,9 +65,6 @@ exports.config = {
     // All other deps in package.json will be excluded from the bundle.
     whitelist: [
       "phoenix",
-      "phoenix_html",
-      "svgjs",
-      "animejs"
-    ]
+      "phoenix_html"    ]
   }
 };
