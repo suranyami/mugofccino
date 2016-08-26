@@ -1,15 +1,12 @@
 defmodule Mugofccino.RoomChannel do
   use Phoenix.Channel
-  def join("rooms:lobby", auth_msg, socket) do
+
+  def join("topic:" <> _topic_name, _auth_msg, socket) do
     {:ok, socket}
   end
 
-  def join("rooms:" <> _private_room_id, _auth_msg, socket) do
-    {:error, %{reason: "unauthorized"}}
-  end
-
-  def handle_in("new_msg", %{"body" => body}, socket) do
-    broadcast! socket, "new_msg", %{body: body}
+  def handle_in("message", %{"body" => body}, socket) do
+    broadcast! socket, "message", %{body: body}
     {:noreply, socket}
   end
 
