@@ -2,11 +2,11 @@
 @import "neat/neat";
 @import "base/base";
 
-$base-size: 12px;
+$base-size: 10px;
 
 body {
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   @include outer-container;
   font-family: $helvetica;
   font-size: $base-size;
