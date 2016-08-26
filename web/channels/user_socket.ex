@@ -2,7 +2,7 @@ defmodule Mugofccino.UserSocket do
   use Phoenix.Socket
 
   # Channels
-  # channel "room:*", Mugofccino.RoomChannel
+  channel "topic:*", Mugofccino.RoomChannel
 
   # Transports
   transport :websocket, Phoenix.Transports.WebSocket
