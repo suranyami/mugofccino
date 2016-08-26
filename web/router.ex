@@ -16,8 +16,10 @@ defmodule Mugofccino.Router do
   scope "/", Mugofccino do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", RoomController, :index
     resources "/users", UserController
+    resources "/game", GameController
+    resources "/page", PageController
   end
 
   # Other scopes may use custom stacks.
