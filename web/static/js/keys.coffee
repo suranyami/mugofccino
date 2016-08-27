@@ -1,17 +1,16 @@
 class @Keys
-  LEFT = 37
   UP = 38
-  RIGHT = 39
   DOWN = 40
+  LEFT = 37
+  RIGHT = 39
   SPACEBAR = 32
   HIGHLIGHT = 'red'
   DEFAULT = 'white'
 
-  constructor: () ->
+  constructor: (updateFunc) ->
     @keys = [0, 0]
     $(document).keydown (e) =>
       key = e.which
-      console.log @keys
       switch key
         when LEFT
           @keys[0] = -1
@@ -28,11 +27,11 @@ class @Keys
         when SPACEBAR
           @keys = [0, 0]
           $('.arrows span').css(color: DEFAULT)
+      updateFunc(@keys)
       return false
-      
+
     $(document).keyup (e) =>
       key = e.which
-      console.log @keys
       switch key
         when LEFT
           @keys[0] =  0
@@ -46,5 +45,5 @@ class @Keys
         when DOWN
           @keys[1] =  0
           $('.down').css(color: DEFAULT)
+      updateFunc(@keys)
       return false
-      

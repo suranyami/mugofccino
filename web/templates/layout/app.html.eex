@@ -9,10 +9,11 @@
 
     <title>Hello Mugofccino!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <script src="//cdn.jsdelivr.net/phaser/2.5.0/phaser.min.js"></script>
   </head>
 
   <body>
-    <div class="container">
+    <!-- <div class="container">
       <header class="header">
         <h3>mugofccino</h3>
       </header>
@@ -24,7 +25,9 @@
         <%= render @view_module, @view_template, assigns %>
       </main>
 
-    </div> <!-- /container -->
+    </div> -->
+    <div id="info" data-image-path="<%= static_path(@conn, "/images") %>"></div>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
   </body>
 </html>
