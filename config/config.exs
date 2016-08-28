@@ -16,6 +16,7 @@ config :mugofccino,
 # Configures the endpoint
 config :mugofccino, Mugofccino.Endpoint,
   url: [host: "localhost"],
+  root: Path.dirname(__DIR__),
   secret_key_base:
     "XApGHH9hc75Ph34bMvCQWPUF/1hFuozsygX2uZHdy2cAQlmw6XeXODb+ovC6Zdtk",
   render_errors: [view: Mugofccino.ErrorView, accepts: ~w(html json)],

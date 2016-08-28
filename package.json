@@ -6,6 +6,7 @@
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
+    "jquery": "^3.1.0",
     "p2": "^0.7.1",
     "phaser": "^2.6.2",
     "phoenix": "file:deps/phoenix",

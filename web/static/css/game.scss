@@ -1,27 +1,10 @@
 $screen-border: 1px solid white;
 
-#scorebar, #status {
-  width: 600px;
-  margin: 0;
-  padding: 3pt;
-  display: block;
-}
-
-#scorebar {
-  border: $screen-border;
-  border-bottom: none;
-}
-
-#status {
-  border: $screen-border;
-  border-top: none;
-}
-
 #screen {
-  width: 600px;
-  height: 400px;
+  width: 800px;
+  height: 600px;
   margin: 0;
   padding: 0;
   border: $screen-border;
-  color: red;
+  color: white;
 }

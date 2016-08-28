@@ -51,7 +51,10 @@ exports.config = {
     enabled: true,
     globals: {
       $: 'jquery',
-      jQuery: 'jquery'
+      jQuery: 'jquery',
+      p2: 'p2',
+      pixi: 'pixi.js',
+      Phaser: 'phaser'
     }
 
     // // Whitelist the npm deps to be pulled in as front-end assets.
