@@ -21,9 +21,4 @@ defmodule Mugofccino.Router do
     resources "/game", GameController
     resources "/page", PageController
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Mugofccino do
-  #   pipe_through :api
-  # end
 end

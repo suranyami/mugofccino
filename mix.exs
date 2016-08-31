@@ -29,7 +29,8 @@ defmodule Mugofccino.Mixfile do
         :logger,
         :gettext,
         :phoenix_ecto,
-        :postgrex
+        :postgrex,
+        :mime
       ]
     ]
   end
@@ -55,6 +56,7 @@ defmodule Mugofccino.Mixfile do
       {:mix_test_watch, "~> 0.2", only: :dev},
       {:dogma, "~> 0.1", only: [:dev, :test]},
       {:ex_unit_notifier, "~> 0.1", only: :test},
+      {:mime, "~> 1.0.1"},
       {:faker, ">= 0.5.1"}
     ]
   end

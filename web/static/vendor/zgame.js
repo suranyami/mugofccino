@@ -1,93 +1,171 @@
 window.onload = function() {
-  var assetPath = $(document.body).data("image-path")
+  var assetPath = $(document.body).data("asset-path")
+  var imagePath = `${assetPath}images`
+  var soundPath = `${assetPath}sounds`
   var player
-  var platforms
+  var starfield
   var cursors
-  var stars
   var score = 0
   var scoreText
+  var playerInfo
+  var screenWidth, screenHeight, midWidth, midHeight
+
+  var ACCLERATION = 600
+  var DRAG = 400
+  var MAXSPEED = 400
+  var BULLET_SPEED = 400;
+  var BULLET_FIRE_RATE = 250;
+
+  var bullet
+  var bullets
+  var bulletTime = 0
+
+  var aliens
+  var explosion
+  var explosions
+  var explosionSound
+  var blaster
 
   var game = new Phaser.Game(800, 600,
     Phaser.AUTO, 'screen',
     {
       preload: preload,
       create: create,
-      update: update
+      update: update,
+      render: render
     })
 
-  function imageFor(name) {
-    return assetPath + '/' + name + '.png'
-  }
-
-  function loadImage(name) {
-    game.load.image(name, imageFor(name))
-  }
-
-  function preload () {
-    loadImage('phaser')
-    loadImage('sky')
-    loadImage('platform')
-    loadImage('star')
-    game.load.spritesheet('dude', imageFor('dude'), 32, 48)
-  }
-
-  function create () {
-    game.physics.startSystem(Phaser.Physics.ARCADE)
-    game.add.sprite(0, 0, 'sky')
-    platforms = game.add.group()
-    platforms.enableBody = true
-    ground = platforms.create(0, game.world.height - 64, 'platform')
-    ground.scale.setTo(2, 2)
-    ground.body.immovable = true
-
-    var ledge1 = platforms.create(400, 400, 'platform')
-      .body.immovable = true
-    var ledge2 = platforms.create(-150, 250, 'platform')
-      .body.immovable = true
-
-    player = game.add.sprite(32, game.world.height - 150, 'dude')
-    game.physics.arcade.enable(player)
-    player.body.bounce.y = 0.2
-    player.body.gravity.y = 500
-    player.body.collideWorldBounds = true
-    player.animations.add('left', [0, 1, 2, 3], 10, true)
-    player.animations.add('right', [5, 6, 7, 8], 10, true)
-
-    cursors = game.input.keyboard.createCursorKeys()
-
-    stars = game.add.group()
-    stars.enableBody = true
-    for (var i = 0; i < 12; i++) {
-      var star = stars.create(i * 70, 0, 'star')
-      star.body.gravity.y = 20
-      star.body.bounce.y = 0.7 + Math.random() * 0.2
+    function imageFor(name) {
+      return imagePath + '/' + name + '.png'
     }
-    scoreText = game.add.text(16, 16, 'Score: 0', {fontSize: '32px', fill: '#000'})
+
+    function loadImage(name, filename = name) {
+      game.load.image(name, imageFor(filename))
+    }
+
+    function preload () {
+      loadImage('starfield')
+      loadImage('player')
+      loadImage('invader', 'enemy-blue')
+      loadImage('bullet')
+      game.load.spritesheet('explosion', imageFor('explode'), 128, 128)
+
+      game.load.audio('explosion', soundPath + '/explosion.mp3');
+      game.load.audio('blaster', soundPath + '/blaster.mp3');
+    }
+
+    function create () {
+      game.renderer.clearBeforeRender = false
+      game.renderer.roundPixels = true
+      game.physics.startSystem(Phaser.Physics.ARCADE)
+      screenWidth = game.world.width
+      screenHeight = game.world.height
+      midWidth = screenWidth / 2.0
+      midHeight = screenHeight / 2.0
+
+      starfield = game.add.tileSprite(0, 0, 800, 600, 'starfield')
+
+      aliens = game.add.group()
+      aliens.enableBody = true
+      aliens.physicsBodyType = Phaser.Physics.ARCADE
+
+      createAliens()
+
+      bullets = game.add.weapon(30, 'bullet')
+      bullets.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
+      bullets.bulletSpeed = BULLET_SPEED
+      bullets.fireRate = BULLET_FIRE_RATE
+
+      explosionSound = game.add.audio('explosion')
+      blaster = game.add.audio('blaster')
+      game.sound.setDecodedCallback([explosion, blaster], start, this);
+
+      bullets.onFire.add(function() {
+        blaster.play()
+      })
+
+      player = game.add.sprite(midWidth, midHeight, 'player')
+      player.anchor.setTo(0.5, 0.5)
+      game.physics.enable(player, Phaser.Physics.ARCADE)
+      game.physics.enable(bullets, Phaser.Physics.ARCADE)
+
+      player.body.maxVelocity.setTo(MAXSPEED, MAXSPEED)
+      player.body.drag.setTo(DRAG, DRAG)
+
+      explosions = game.add.group()
+      explosions.createMultiple(30, 'explosion')
+      explosions.forEach(setupInvader, this)
+
+      cursors = game.input.keyboard.createCursorKeys()
+      game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR])
+
+      bullets.trackSprite(player, 0, 0, true)
+    }
+
+    function start() {
+      console.log("start called")
+      // Add stuff here for when after big files load, I guess?
+    }
+
+    function setupInvader (invader) {
+      invader.anchor.x = 0.5;
+      invader.anchor.y = 0.5;
+      invader.animations.add('explosion');
+    }
+
+    function createAliens () {
+      for (var x = 0; x < 4; x++) {
+        var alien = aliens.create(x * 100, 100, 'invader');
+        alien.anchor.setTo(0.5, 0.5)
+        alien.height = 75
+        alien.width = 60
+        alien.animations.add('fly', [ 0, 1, 2, 3 ], 20, true);
+        alien.play('fly');
+        alien.body.moves = false;
+      }
+    }
+
+    function update() {
+      if (cursors.up.isDown) {
+        game.physics.arcade.accelerationFromRotation(player.rotation, 300, player.body.acceleration)
+      } else {
+        player.body.acceleration.set(0)
+      }
+
+      if (cursors.left.isDown) {
+        player.body.angularVelocity = -300
+      } else if (cursors.right.isDown) {
+        player.body.angularVelocity = 300
+      } else {
+        player.body.angularVelocity = 0
+      }
+
+      if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+        bullets.fire()
+      }
+
+      game.world.wrap(player, 16, true)
+      game.physics.arcade.overlap(bullets.bullets, aliens, collisionHandler, null, this);
+      game.physics.arcade.overlap(player, aliens, collisionHandler, null, this);
   }
 
-  function collectStar(player, star) {
-      star.kill()
-      score += 10
-      scoreText.text = 'Score: ' + score
+  function collisionHandler (bullet, alien) {
+    //  When a bullet hits an alien we kill them both
+    bullet.kill();
+    alien.kill();
+
+    //  And create an explosion :)
+    explosion = explosions.getFirstExists(false);
+    explosion.reset(alien.body.x, alien.body.y);
+    explosion.play('explosion', 30, false, true);
+    explosionSound.play()
   }
 
-  function update() {
-    game.physics.arcade.collide(player, platforms)
-    game.physics.arcade.collide(stars, platforms)
-    game.physics.arcade.overlap(player, stars, collectStar, null, this)
-    player.body.velocity.x = 0
-    if (cursors.left.isDown) {
-      player.body.velocity.x = -150
-      player.animations.play('left')
-    } else if (cursors.right.isDown) {
-      player.body.velocity.x = 150
-      player.animations.play('right')
-    } else {
-      player.animations.stop()
-      player.frame = 4
-    }
-    if (cursors.up.isDown && player.body.touching.down) {
-        player.body.velocity.y = -550;
-    }
+  function render() {
+    game.debug.text(game.time.now, 32, 32)
+    // bullets.debug()
+    // for (var i = 0; i < aliens.length; i++) {
+    //     game.debug.body(aliens.children[i]);
+    // }
   }
-};
+}

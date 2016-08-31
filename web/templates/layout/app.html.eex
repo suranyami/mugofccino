@@ -12,7 +12,7 @@
   <!-- <script src="//cdn.jsdelivr.net/phaser/2.5.0/phaser.min.js"></script> -->
 </head>
 
-<body data-image-path="<%= static_path(@conn, "/images") %>">
+<body data-asset-path='<%= static_path(@conn, "/") %>'>
   <header class="header">
     <h6>mugofccino</h6>
   </header>
