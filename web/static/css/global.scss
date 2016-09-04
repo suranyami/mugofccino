@@ -5,9 +5,9 @@
 $base-size: 16px;
 
 body {
-  background-color: white;
-  color: black;
-  font-family: $helvetica;
+  background-color: black;
+  color: white;
+  font-family: $base-font-family;
   font-size: $base-size;
   @include outer-container;
 }
