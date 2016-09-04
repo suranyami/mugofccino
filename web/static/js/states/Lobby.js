@@ -1,18 +1,17 @@
-import {createLabel} from "../common/labels"
+import {createLabel} from '../common/labels'
 
 export class Lobby extends Phaser.State {
-  init(...options) {
-    console.log(options)
-    const [nextState] = options
-    this.nextState = nextState
+  create () {
+    this.label = createLabel(this, 'Hello world')
+    this.label.anchor.setTo(0.5)
+    this.label.inputEnabled = true
+    // let listener = () => {
+    //   this.state.start('lobby0')
+    // }
+    // this.label.events.onInputDown.add(listener, this)
   }
-  create(nextState) {
-    const label = createLabel(this, "Hello world")
-    label.anchor.setTo(0.5)
-    label.inputEnabled = true
-    let listener = () => {
-      this.nextState()
-    }
-    label.events.onInputDown.add(listener, this);
+
+  update () {
+    this.label.velocity
   }
 }
