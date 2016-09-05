@@ -1,17 +1,29 @@
-import {createLabel} from '../common/labels'
+// import {Label} from '../common/Label'
+// import {Phaser} from '../../vendor/phaser'
+const DEFAULT_STYLE = {
+  font: '65px Carbon',
+  fill: 'green',
+  align: 'center'
+}
 
-export class Lobby extends Phaser.State {
+export class Label extends window.Phaser.Text {
+  constructor (state, text, style = DEFAULT_STYLE) {
+    const {centerX, centerY} = state.world
+    super(state, centerX, centerY, text, style)
+    this.setShadow(4, 4, '#333333', 4, true, false)
+    this.anchor.setTo(0.5)
+  }
+}
+
+export class Lobby extends window.Phaser.State {
   create () {
-    this.label = createLabel(this, 'Hello world')
-    this.label.anchor.setTo(0.5)
-    this.label.inputEnabled = true
-    // let listener = () => {
-    //   this.state.start('lobby0')
-    // }
-    // this.label.events.onInputDown.add(listener, this)
+    const label = new Label(this, 'hello 2')
+    // const {centerX, centerY} = this.world
+    // this.label = this.add.text(centerX, centerY, 'Hello', {font: '65px Arial', fill: '#ff0000'})
+    // this.label.anchor.setTo(0.5)
   }
 
   update () {
-    this.label.velocity
+    // this.label.velocity
   }
 }

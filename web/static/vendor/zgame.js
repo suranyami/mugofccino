@@ -83,11 +83,11 @@
 //       bullets.onFire.add(function() {
 //         blaster.play()
 //       })
-//
+//       game.physics.enable(bullets, Phaser.Physics.ARCADE)
+
 //       player = game.add.sprite(midWidth, midHeight, 'player')
 //       player.anchor.setTo(0.5, 0.5)
 //       game.physics.enable(player, Phaser.Physics.ARCADE)
-//       game.physics.enable(bullets, Phaser.Physics.ARCADE)
 //
 //       player.body.maxVelocity.setTo(MAXSPEED, MAXSPEED)
 //       player.body.drag.setTo(DRAG, DRAG)
