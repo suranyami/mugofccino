@@ -1,16 +1,16 @@
 exports.config = {
   files: {
     javascripts: {
-      joinTo: "js/app.js"
+      joinTo: 'js/app.js'
     },
     stylesheets: {
-      joinTo: "css/app.css",
+      joinTo: 'css/app.css',
       order: {
-        after: ["web/static/css/app.css"] // concat app.css last
+        after: ['web/static/css/app.css'] // concat app.css last
       }
     },
     templates: {
-      joinTo: "js/app.js"
+      joinTo: 'js/app.js'
     }
   },
 
@@ -20,10 +20,10 @@ exports.config = {
 
   paths: {
     watched: [
-      "web/static",
-      "test/static"
+      'web/static',
+      'test/static'
     ],
-    public: "priv/static"
+    public: 'priv/static'
   },
 
   plugins: {
@@ -34,11 +34,11 @@ exports.config = {
 
   modules: {
     autoRequire: {
-      "js/app.js": ["web/static/js/app"]
+      'js/app.js': ['web/static/js/app']
     }
   },
 
   npm: {
     enabled: true
   }
-};
+}
