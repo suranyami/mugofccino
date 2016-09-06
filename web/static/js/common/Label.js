@@ -5,10 +5,9 @@ const DEFAULT_STYLE = {
 }
 
 export class Label extends window.Phaser.Text {
-  constructor (state, text, style = DEFAULT_STYLE) {
-    const {centerX, centerY} = state.world
-    super(state, centerX, centerY, text, style)
+  constructor (game, x, y, text, style = DEFAULT_STYLE) {
+    super(game, x, y, text, style)
     this.setShadow(4, 4, '#333333', 4, true, false)
-    this.anchor.setTo(0.5)
+    this.anchor.setTo(0.5, 0.5)
   }
 }
