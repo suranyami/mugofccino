@@ -1,20 +1,21 @@
 // import {joinChannel} from './common/channels'
+import {Boot} from './states/Boot'
 import {Lobby} from './states/Lobby'
-// import {Phaser} from '../vendor/phaser.js'
+import {MainScreen} from './states/MainScreen'
 
-export class Game extends Phaser.Game {
+export class Game extends window.Phaser.Game {
   constructor (width, height, container, assetPath) {
-    console.log(width, height, container, assetPath)
-    super(width, height, Phaser.AUTO, container)
+    super(width, height, window.Phaser.AUTO, container)
     this.assetPath = assetPath
+    this.state.add('boot', Boot, false)
     this.state.add('lobby', Lobby, false)
-    this.state.start("lobby")
+    this.state.add('main_screen', MainScreen, false)
+    this.backgroundColor = '#000000'
   }
 
-  start () {
+  start (socket) {
     console.log('Game.start')
-    this.state.start("lobby", true, false)
-
+    this.state.start('boot', true, false)
     // socket.connect()
     // const channel = socket.channel('games:lobby', {})
 
