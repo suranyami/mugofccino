@@ -24,8 +24,11 @@ export class Lobby extends window.Phaser.State {
     this.game.stage.addChild(this.title)
     this.title.inputEnabled = true
     let listener = function () {
+      console.log('Lobby.listener')
       this.game.state.start('main_screen', true, false)
+      this.game.input.keyboard.onDownCallback = null
     }
-    this.title.events.onInputDown.add(listener, this)
+    // start when press any key
+    this.game.input.keyboard.onDownCallback = listener
   }
 }
