@@ -11,9 +11,6 @@ export class Lobby extends window.Phaser.State {
     this.createTitle()
   }
 
-  update () {
-  }
-
   shutdown () {
     console.log('shutdown lobby')
     this.game.stage.removeChildren()
