@@ -15,7 +15,8 @@ export class Boot extends window.Phaser.State {
   }
 
   create () {
-    this.game.state.start('lobby', true, false)
+    // this.game.state.start('lobby', true, false)
+    this.game.state.start('main_screen', true, false)
   }
 
   spriteFor (name, width, height, filename = name, suffix = 'png') {
