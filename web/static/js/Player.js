@@ -1,25 +1,21 @@
-const MAXSPEED = 400
-const DRAG = 400
 const BULLET_SPEED = 400
 const BULLET_FIRE_RATE = 250
 
 // const ACCELERATION = 600
 
-export class Player {
-  constructor (game) {
-    console.log('Player.constructor')
-    this.game = game
-  }
+import {BasePlayer} from './BasePlayer'
 
+export class Player extends BasePlayer {
   start () {
-    this.sprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player')
-    this.sprite.anchor.setTo(0.5, 0.5)
-    this.game.physics.enable(this.sprite, window.Phaser.Physics.ARCADE)
+    console.log('Player.start')
+    this.makeSprite('player')
     this.cursors = this.game.input.keyboard.createCursorKeys()
     this.game.input.keyboard.addKeyCapture([window.Phaser.Keyboard.SPACEBAR])
-    this.sprite.body.maxVelocity.setTo(MAXSPEED, MAXSPEED)
-    this.sprite.body.drag.setTo(DRAG, DRAG)
     this.makeBullets()
+  }
+
+  setUUID (uuid) {
+    this.uuid = uuid
   }
 
   makeBullets () {
@@ -60,5 +56,13 @@ export class Player {
     }
 
     this.game.world.wrap(this.sprite, 16, true)
+  }
+
+  getPos () {
+    const serializePosition = ({x, y}) => Object.assign({x, y})
+    let message = serializePosition(this.sprite)
+    message.rot = this.sprite.angle
+    message.uuid = this.uuid
+    return message
   }
 }
