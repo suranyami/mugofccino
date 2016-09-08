@@ -44,7 +44,7 @@ defmodule Mugofccino.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.2.0"},
+      {:phoenix, "~> 1.2.1"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
@@ -57,6 +57,7 @@ defmodule Mugofccino.Mixfile do
       {:dogma, "~> 0.1", only: [:dev, :test]},
       {:ex_unit_notifier, "~> 0.1", only: :test},
       {:mime, "~> 1.0.1"},
+      {:uuid, "~> 1.1"},
       {:faker, ">= 0.5.1"}
     ]
   end
