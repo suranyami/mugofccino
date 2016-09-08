@@ -8,6 +8,7 @@ export class Boot extends window.Phaser.State {
     this.loadImage('player')
     this.loadImage('starfield')
     this.loadImage('enemy', 'enemy-blue')
+    this.loadImage('opponent')
     this.loadImage('bullet')
     this.spriteFor('explosion', 128, 128, 'explode')
     this.loadSound('explosion')
