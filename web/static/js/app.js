@@ -5,7 +5,6 @@ import {Lobby} from './states/Lobby'
 import {MainScreen} from './states/MainScreen'
 
 let game = new window.Phaser.Game(800, 600, window.Phaser.AUTO, 'screen')
-game.assetPath = document.body.dataset.assetPath
 game.state.add('boot', Boot, false)
 game.state.add('lobby', Lobby, false)
 game.state.add('main_screen', MainScreen, false)
