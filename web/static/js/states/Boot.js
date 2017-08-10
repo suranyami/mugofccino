@@ -1,7 +1,7 @@
 // Preloads the assets
 export class Boot extends window.Phaser.State {
   preload () {
-    console.log('Boot.preload')
+    // console.log('Boot.preload')
     this.assetPath = document.body.dataset.assetPath
     this.imagePath = `${this.assetPath}images`
     this.soundPath = `${this.assetPath}sounds`
@@ -23,7 +23,7 @@ export class Boot extends window.Phaser.State {
   spriteFor (name, width, height, filename = name, suffix = 'png') {
     let path = this.imageFor(filename, suffix)
     this.game.load.spritesheet(name, path, width, height)
-    console.log(`sprite: '${name}', '${path}', ${width}, ${height}`)
+    // console.log(`sprite: '${name}', '${path}', ${width}, ${height}`)
   }
 
   soundFor (name, suffix = 'mp3') {
@@ -33,7 +33,7 @@ export class Boot extends window.Phaser.State {
   loadSound (name, filename = name) {
     let path = this.soundFor(filename)
     this.game.load.audio(name, path)
-    console.log(`sound: '${name}', '${path}'`)
+    // console.log(`sound: '${name}', '${path}'`)
   }
 
   imageFor (name, suffix = 'png') {
@@ -43,6 +43,6 @@ export class Boot extends window.Phaser.State {
   loadImage (name, filename = name) {
     let path = this.imageFor(filename)
     this.game.load.image(name, path)
-    console.log(`image: '${name}', '${path}'`)
+    // console.log(`image: '${name}', '${path}'`)
   }
 }

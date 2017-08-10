@@ -7,7 +7,7 @@ const UPDATE_PERIOD = 100 // milliseconds
 
 export class MainScreen extends window.Phaser.State {
   create () {
-    console.log('MainScreen.create')
+    // console.log('MainScreen.create')
     this.socket = new Socket('/socket', {params: {token: window.userToken}})
     this.socket.connect()
 
@@ -26,7 +26,7 @@ export class MainScreen extends window.Phaser.State {
     this.channel = this.socket.channel('games:lobby', {})
     this.channel.join()
     .receive('ok', resp => {
-      console.log('Joined successfully', resp)
+      // console.log('Joined successfully', resp)
       this.player.start()
       this.started = true
     })
@@ -35,28 +35,28 @@ export class MainScreen extends window.Phaser.State {
     })
 
     this.channel.on('joined', ({uuid}) => {
-      console.log('Joined with ID:', uuid)
+      // console.log('Joined with ID:', uuid)
       this.uuid = uuid
       this.game.debug.text('My ID: ' + uuid)
       this.player.setUUID(uuid)
     })
 
     this.channel.on('opponent_joined', ({uuid}) => {
-      console.log('Opponent joined with ID:', uuid)
+      // console.log('Opponent joined with ID:', uuid)
       if (this.uuid !== uuid) {
-        console.log('AND IT\'S NOT US')
+        // console.log('AND IT\'S NOT US')
         let opponent = new Opponent(this.game)
         this.opponents[uuid] = opponent
         opponent.start()
       }
     })
 
-    this.channel.on('opponent_move', ({uuid, x, y, rot}) => {
-      console.log(uuid)
+    this.channel.on('opponent_move', ({uuid, x, y, angle}) => {
+      // console.log(uuid)
       let opponent = this.opponents[uuid]
       if (opponent) {
-        console.log('Opponent update:', uuid, x, y, rot)
-        opponent.updatePos(x, y, rot)
+        // console.log('Opponent update:', uuid, x, y, angle)
+        opponent.updatePos(x, y, angle)
       }
     })
 
@@ -65,7 +65,7 @@ export class MainScreen extends window.Phaser.State {
     })
 
     this.channel.onClose(() => {
-      console.log('the channel has gone away gracefully')
+      // console.log('the channel has gone away gracefully')
     })
   }
 
@@ -83,19 +83,20 @@ export class MainScreen extends window.Phaser.State {
   }
 
   sendPosition () {
-    console.log('sendPosition()')
-    const message = this.player.getPos()
+    // console.log('sendPosition()')
+    const player = this.player
+    const message = player.getPos()
     this.channel.push('move', message)
-    console.log('Player#move:', message)
+    // console.log('Player#move:', message)
   }
 
   render () {
-    // this.game.debug.text('help', 32, 32)
+    this.game.debug.text(this.game.time.now, 32, 32)
     // this.player.bullets.debug()
   }
 
   shutdown () {
-    console.log('destroying main_screen')
+    // console.log('destroying main_screen')
     this.game.stage.removeChildren()
   }
 }

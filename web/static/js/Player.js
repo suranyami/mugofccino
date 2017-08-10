@@ -7,10 +7,11 @@ import {BasePlayer} from './BasePlayer'
 
 export class Player extends BasePlayer {
   start () {
-    console.log('Player.start')
+    // console.log('Player.start')
     this.makeSprite('player')
     this.cursors = this.game.input.keyboard.createCursorKeys()
     this.game.input.keyboard.addKeyCapture([window.Phaser.Keyboard.SPACEBAR])
+    this.activeBullets = []
     this.makeBullets()
   }
 
@@ -19,7 +20,7 @@ export class Player extends BasePlayer {
   }
 
   makeBullets () {
-    console.log('Player.makeBullets')
+    // console.log('Player.makeBullets')
     this.bullets = this.game.add.weapon(30, 'bullet')
     this.bullets.bulletKillType = window.Phaser.Weapon.KILL_WORLD_BOUNDS
     this.bullets.bulletSpeed = BULLET_SPEED
@@ -28,12 +29,32 @@ export class Player extends BasePlayer {
     this.explosion = this.game.add.audio('explosion')
     this.blaster = this.game.add.audio('blaster')
     // this.game.sound.setDecodedCallback([this.explosion, this.blaster], this.start, this)
-    let pew = () => {
-      this.blaster.play()
-    }
-    this.bullets.onFire.add(pew)
+    this.bullets.onFire.add(this.bulletFired, this)
+    this.bullets.onKill.add(this.bulletKilled, this)
     this.game.physics.enable(this.bullets, window.Phaser.Physics.ARCADE)
     this.bullets.trackSprite(this.sprite, 16, 0, true)
+  }
+
+  bulletFired (weapon, bullet) {
+    this.blaster.play()
+    this.activeBullets.push(bullet)
+  }
+
+  bulletKilled (bullet) {
+    let i = this.activeBullets.indexOf(bullet)
+    if (i !== -1) {
+      this.activeBullets.splice(i, 1)
+    }
+  }
+
+  bulletPositions () {
+    return this.activeBullets.map(function (item) {
+      return {
+        x: item.position.x,
+        y: item.position.y,
+        angle: item.angle
+      }
+    })
   }
 
   update () {
@@ -61,7 +82,7 @@ export class Player extends BasePlayer {
   getPos () {
     const serializePosition = ({x, y}) => Object.assign({x, y})
     let message = serializePosition(this.sprite)
-    message.rot = this.sprite.angle
+    message.angle = this.sprite.angle
     message.uuid = this.uuid
     return message
   }

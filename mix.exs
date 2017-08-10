@@ -58,7 +58,7 @@ defmodule Mugofccino.Mixfile do
       {:ex_unit_notifier, "~> 0.1", only: :test},
       {:mime, "~> 1.0.1"},
       {:uuid, "~> 1.1"},
-      {:faker, ">= 0.5.1"}
+      {:faker, "~> 0.7"}
     ]
   end
 
