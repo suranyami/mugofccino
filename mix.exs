@@ -5,7 +5,7 @@ defmodule Mugofccino.Mixfile do
     [
       app: :mugofccino,
       version: "0.0.1",
-      elixir: "~> 1.3",
+      elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       build_embedded: Mix.env == :prod,
@@ -44,21 +44,21 @@ defmodule Mugofccino.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.2.1"},
+      {:phoenix, "~> 1.3"},
       {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.0"},
+      {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.6"},
+      {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"},
+      {:gettext, "~> 0.13"},
+      {:cowboy, "~> 1.1"},
       {:phoenix_haml, github: "chrismccord/phoenix_haml"},
-      {:mix_test_watch, "~> 0.2", only: :dev},
+      {:mix_test_watch, "~> 0.4", only: :dev},
       {:dogma, "~> 0.1", only: [:dev, :test]},
       {:ex_unit_notifier, "~> 0.1", only: :test},
-      {:mime, "~> 1.0.1"},
+      {:mime, "~> 1.1"},
       {:uuid, "~> 1.1"},
-      {:faker, "~> 0.7"}
+      {:faker, "~> 0.8"}
     ]
   end
 
